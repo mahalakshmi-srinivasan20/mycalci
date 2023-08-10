@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Calculator</title>
+  <style>
+    body {
+      background-image: url('bg.jpg');
+      background-size: cover;
+      font-family: Arial, sans-serif;
+    }
+
+    #calculator {
+      width: 300px;
+      margin: 100px auto;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(238, 234, 234, 0.2);
+    }
+    .clear{
+        background-color: rgb(255, 0, 51);
+    }
+
+    .operator {
+      background-color: #0a04c9;
+    }
+
+    .input-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    button {
+      flex: 1;
+      height: 50px;
+      font-size: 20px;
+      margin: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-size: 30px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <div class="input-row">
+      <input type="text" id="inputField" readonly>
+      <button class="clear" onclick="clearInput()">C</button>
+    </div>
+    <div class="input-row">
+      <button onclick="appendToInput('7')">7</button>
+      <button onclick="appendToInput('8')">8</button>
+      <button onclick="appendToInput('9')">9</button>
+      <button class="operator" onclick="appendToInput('+')">+</button>
+    </div>
+    <div class="input-row">
+      <button onclick="appendToInput('4')">4</button>
+      <button onclick="appendToInput('5')">5</button>
+      <button onclick="appendToInput('6')">6</button>
+      <button class="operator" onclick="appendToInput('-')">-</button>
+    </div>
+    <div class="input-row">
+      <button onclick="appendToInput('1')">1</button>
+      <button onclick="appendToInput('2')">2</button>
+      <button onclick="appendToInput('3')">3</button>
+      <button class="operator" onclick="appendToInput('*')">*</button>
+    </div>
+    <div class="input-row">
+      <button onclick="appendToInput('0')">0</button>
+      <button onclick="calculate()">=</button>
+      <button class="operator" onclick="appendToInput('/')">/</button>
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    let input = "";
+    const inputField = document.getElementById("inputField");
+    const resultElement = document.getElementById("result");
+
+    function appendToInput(value) {
+      input += value;
+      inputField.value = input;
+    }
+
+    function clearInput() {
+      input = "";
+      inputField.value = input;
+    }
+
+    function calculate() {
+      try {
+        const calculatedResult = eval(input).toString();
+        resultElement.innerHTML = calculatedResult;
+      } catch (error) {
+        resultElement.innerHTML = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
